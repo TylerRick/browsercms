@@ -60,7 +60,7 @@ module Cms
       end
   
       def helper_path
-        "app/helpers/cms/#{name.underscore}_helper.rb"
+        "cms/#{name.underscore}_helper.rb"
       end
   
       def helper_class
@@ -118,7 +118,7 @@ module Cms
     
         # Make helpers and instance vars available
         view_class.send(:include, @controller.class.master_helper_module)
-        if $:.detect{|d| File.exists?(File.join(d, self.class.helper_path))}
+        if ActiveSupport::Dependencies.load_paths.detect{|d| File.exists?(File.join(d, self.class.helper_path))}
           view_class.send(:include, self.class.helper_class)
         end
         
@@ -127,7 +127,7 @@ module Cms
           @controller.instance_variable_get("@template").content_for(name, content, &block)
         end
         
-        # Copy instance variables from this renderable object to it's view
+        # Copy instance variables from this renderable object to its view
         action_view.assigns = assigns_for_view
           
         if respond_to?(:inline_options) && self.inline_options && self.inline_options.has_key?(:inline)

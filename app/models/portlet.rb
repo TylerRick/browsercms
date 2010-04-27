@@ -30,7 +30,7 @@ class Portlet < ActiveRecord::Base
       end      
       
       def self.helper_path
-        "app/portlets/helpers/#{name.underscore}_helper.rb"
+        "#{name.underscore}_helper.rb"
       end
 
       def self.helper_class

@@ -49,6 +49,7 @@ module Cms
     
     def add_to_rails_paths(path)
       ActiveSupport::Dependencies.load_paths << File.join(path, "app", "portlets")
+      ActiveSupport::Dependencies.load_paths << File.join(path, "app", "portlets", "helpers")
     end
 
     def add_to_routes(route)
