@@ -1,7 +1,7 @@
 class PageRoute < ActiveRecord::Base
   belongs_to :page
-  has_many :conditions, :class_name => "PageRouteCondition"
-  has_many :requirements, :class_name => "PageRouteRequirement"
+  has_many :conditions,   :class_name => "PageRouteCondition",   :dependent => :destroy
+  has_many :requirements, :class_name => "PageRouteRequirement", :dependent => :destroy
   
   validates_presence_of :pattern, :page_id
   validates_uniqueness_of :pattern
